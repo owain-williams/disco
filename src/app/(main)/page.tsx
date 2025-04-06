@@ -1,3 +1,4 @@
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   UserButton,
@@ -19,6 +20,7 @@ export default function Home() {
         <SignInButton />
         <SignUpButton />
       </SignedOut>
+      <ThemeToggle />
     </div>
   );
 }

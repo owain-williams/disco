@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <Providers>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={`${openSans.variable} antialiased`}>
           <ThemeProvider
             attribute="class"
