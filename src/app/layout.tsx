@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers";
 import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -22,7 +23,12 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${openSans.variable} antialiased`}>
+        <body
+          className={cn(
+            `${openSans.variable} antialiased`,
+            "bg-white dark:bg-[#313338]"
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
