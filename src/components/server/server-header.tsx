@@ -1,16 +1,15 @@
 "use client";
 
-import { ServerWithMembersWithProfiles } from "@/lib/types";
-import { MemberRole } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { useModal } from "@/hooks/use-modal-store";
+import { ServerWithMembersWithProfiles } from "@/lib/types";
+import { MemberRole } from "@prisma/client";
 import {
   ChevronDown,
   LogOut,
@@ -27,6 +26,8 @@ type ServerHeaderProps = {
 };
 
 export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
+  const { onOpen } = useModal();
+
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
 
@@ -40,7 +41,10 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
         {isModerator && (
-          <DropdownMenuItem className="text-sm py-2 px-3 cursor-pointer">
+          <DropdownMenuItem
+            className="text-sm py-2 px-3 cursor-pointer"
+            onClick={() => onOpen("invite", { server })}
+          >
             Invite People
             <UserPlus className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
