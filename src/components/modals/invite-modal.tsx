@@ -8,18 +8,16 @@ import {
 } from "@/components/ui/dialog";
 
 import { useModal } from "@/hooks/use-modal-store";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Check, Copy, RefreshCcw } from "lucide-react";
 import { useOrigin } from "@/hooks/use-origin";
+import { Check, Copy, RefreshCcw } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 export const InviteModal = () => {
   const { isOpen, onClose, onOpen, type, data } = useModal();
   const origin = useOrigin();
-  const router = useRouter();
 
   const isModalOpen = isOpen && type === "invite";
   const { server } = data;
