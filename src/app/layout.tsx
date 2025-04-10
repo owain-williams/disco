@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import { ModalProvider } from "@/providers/modal-provider";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>
