@@ -1,12 +1,12 @@
+import { ThemeToggle } from "@/components/theme-toggle";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { UserButton } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { NavigationAction } from "./navigation-action";
 import { NavigationItem } from "./navigation-item";
-import { ThemeToggle } from "../theme-toggle";
-import { UserButton } from "@clerk/nextjs";
 
 export const NavigationSidebar = async () => {
   const profile = await currentProfile();
