@@ -25,7 +25,7 @@ model Server {
   id String @id @default(cuid())
   name String
   imageUrl String @db.Text
-  inviteCode String @db.Text
+  inviteCode String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -45,7 +45,7 @@ enum MemberRole {
 
 model Member {
   id String @id @default(cuid())
-  role MemberRole
+  role MemberRole @default(GUEST)
   profileId String
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   serverId String
