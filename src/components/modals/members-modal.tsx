@@ -14,7 +14,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { UserAvatar } from "../user-avatar";
 
 export const MembersModal = () => {
-  const { isOpen, onClose, onOpen, type, data } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
 
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfiles };
