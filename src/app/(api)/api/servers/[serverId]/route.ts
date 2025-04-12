@@ -4,11 +4,12 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { serverId: string } },
+  { params }: { params: Promise<{ serverId: string }> },
 ) {
   try {
     const profile = await currentProfile();
     const { name, imageUrl } = await req.json();
+    const { serverId } = await params;
 
     if (!profile) {
       return new NextResponse("Unautorised", { status: 401 });
@@ -16,7 +17,7 @@ export async function PATCH(
 
     const server = await db.server.update({
       where: {
-        id: params.serverId,
+        id: serverId,
         profileId: profile.id,
       },
       data: {
