@@ -1,13 +1,14 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  context: { params: { memberId: string } },
+  { params }: { params: Promise<{ memberId: string }> },
 ) {
   try {
     const profile = await currentProfile();
+    const { memberId } = await params;
 
     const { searchParams } = new URL(req.url);
 
@@ -21,7 +22,7 @@ export async function DELETE(
       return new NextResponse("Server ID Missing", { status: 400 });
     }
 
-    if (!context.params.memberId) {
+    if (!memberId) {
       return new NextResponse("Member ID Missing", { status: 400 });
     }
 
@@ -33,7 +34,7 @@ export async function DELETE(
       data: {
         members: {
           deleteMany: {
-            id: context.params.memberId,
+            id: memberId,
             profileId: {
               not: profile.id,
             },
@@ -61,13 +62,14 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  context: { params: { memberId: string } },
+  { params }: { params: Promise<{ memberId: string }> },
 ) {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
     const { role } = await req.json();
 
+    const { memberId } = await params;
     const serverId = searchParams.get("serverId");
 
     if (!profile) {
@@ -78,7 +80,7 @@ export async function PATCH(
       return new NextResponse("Server ID missing", { status: 400 });
     }
 
-    if (!context.params.memberId) {
+    if (!memberId) {
       return new NextResponse("Member ID Missing", { status: 400 });
     }
 
@@ -91,7 +93,7 @@ export async function PATCH(
         members: {
           update: {
             where: {
-              id: context.params.memberId,
+              id: memberId,
               profileId: {
                 not: profile.id,
               },
