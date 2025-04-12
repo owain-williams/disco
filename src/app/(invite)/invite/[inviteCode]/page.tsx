@@ -3,10 +3,11 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
 type InviteCodePageProps = {
-  inviteCode: string;
+  params: Promise<{ inviteCode: string }>;
 };
 
-const InviteCodePage = async ({ inviteCode }: InviteCodePageProps) => {
+const InviteCodePage = async ({ params }: InviteCodePageProps) => {
+  const { inviteCode } = await params;
   const profile = await currentProfile();
 
   if (inviteCode) {
