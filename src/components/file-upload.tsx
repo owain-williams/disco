@@ -32,7 +32,7 @@ export const FileUpload = ({ endpoint, value, onChange }: FileUploadProps) => {
       <UploadDropzone
         appearance={{
           uploadIcon: "size-12 my-4 text-muted-foreground",
-          button: "bg-primary/70 dark:bg-primary/70 px-4 my-4",
+          button: "bg-black px-4 my-4",
         }}
         endpoint={endpoint}
         onClientUploadComplete={(res) => {
