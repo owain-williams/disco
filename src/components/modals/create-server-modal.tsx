@@ -1,5 +1,6 @@
 "use client";
 
+import { FileUpload } from "@/components/file-upload";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,13 +19,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { useModal } from "@/hooks/use-modal-store";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { FileUpload } from "@/components/file-upload";
-import { useRouter } from "next/navigation";
-import { useModal } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Server name is required" }),
@@ -69,7 +68,7 @@ export const CreateServerModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="p-0 overflow-hidden">
+      <DialogContent className="p-0 bg-white text-black overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl font-bold text-center">
             Customise your server
@@ -104,14 +103,14 @@ export const CreateServerModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="uppercase text-xs font-bold text-muted-foreground">
+                    <FormLabel className="uppercase text-xs font-bold text-muted">
                       Server Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
                         {...field}
-                        className="bg-muted focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                         placeholder="Enter server name"
                       />
                     </FormControl>
@@ -120,7 +119,7 @@ export const CreateServerModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-muted px-6 py-4">
+            <DialogFooter className="px-6 py-4">
               <Button disabled={isLoading} variant="default">
                 Create
               </Button>
