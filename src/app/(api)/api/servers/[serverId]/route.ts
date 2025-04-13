@@ -11,6 +11,10 @@ export async function PATCH(
     const { name, imageUrl } = await req.json();
     const { serverId } = await params;
 
+    if (!serverId) {
+      return new NextResponse("Server ID Missing", { status: 400 });
+    }
+
     if (!profile) {
       return new NextResponse("Unautorised", { status: 401 });
     }
