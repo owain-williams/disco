@@ -10,7 +10,7 @@ const InviteCodePage = async ({ params }: InviteCodePageProps) => {
   const { inviteCode } = await params;
   const profile = await currentProfile();
 
-  if (inviteCode) {
+  if (!inviteCode) {
     return redirect("/");
   }
 
@@ -50,6 +50,10 @@ const InviteCodePage = async ({ params }: InviteCodePageProps) => {
 
   if (server) {
     return redirect(`/servers/${server.id}`);
+  }
+
+  if (!server) {
+    return <div>Invite expired</div>;
   }
 
   return <></>;
